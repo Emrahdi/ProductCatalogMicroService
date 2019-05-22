@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Rest.Core {
+    public class ExceptionDecorator : IRestClient {
+        private readonly IRestClient decorated;
+
+        public ExceptionDecorator(IRestClient decorated) {
+            this.decorated = decorated;
+        }
+
+        public async Task<T> GetAsync<T>(string requestUri) {
+            try {
+                return await decorated.GetAsync<T>(requestUri);
+            }
+            catch (Exception exception) {
+                throw exception;
+            }
+        }
+
+        public async Task<T> GetAsync<T>(string requestUri, IDictionary<string, string> parameters) {
+            try {
+                return await decorated.GetAsync<T>(requestUri, parameters);
+            }
+            catch (Exception exception) {
+                throw exception;
+            }
+        }
+
+        public async Task<T> PostAsync<T>(string requestUri, object requestData) {
+            try {
+                return await decorated.PostAsync<T>(requestUri, requestData);
+            }
+            catch (Exception exception) {
+                throw exception;
+            }
+        }
+    }
+}

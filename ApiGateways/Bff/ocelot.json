@@ -1,0 +1,36 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/Product/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Product/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/users/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    }
+
+  ],
+  "AuthenticationOptions": {
+    "AuthenticationProviderKey": "This is the secret key,but must be kept in a vault! Not here!",
+    "AllowedScopes": []
+  },
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000/"
+  }
+}
